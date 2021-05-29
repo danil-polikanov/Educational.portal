@@ -15,7 +15,7 @@ namespace Data
         {
             return null;
         }
-        public List<UserEntity> UserRegistration(string login,string password)
+        public List<UserEntity> UserRegistration(string login, string password)
         {
 
             if (login == "Admin")
@@ -36,19 +36,19 @@ namespace Data
                 }
                 users.Append(a);
             }
-                StringBuilder stringBuilder = new StringBuilder();
-                foreach (var i in users)
-                {
-                    stringBuilder.Append(i.Id + "~");
-                    stringBuilder.Append(i.Login + "~");
-                    stringBuilder.Append(i.Password + ",");
-                }
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (var i in users)
+            {
+                stringBuilder.Append(i.Id + "~");
+                stringBuilder.Append(i.Login + "~");
+                stringBuilder.Append(i.Password + ",");
+            }
 
-                string filename = "Registered Users.txt";
-                using (var file = new StreamWriter(filename))
-                {
-                    file.Write(stringBuilder.ToString());
-                } 
+            string filename = "Registered Users.txt";
+            using (var file = new StreamWriter(filename))
+            {
+                file.Write(stringBuilder.ToString());
+            }
             return users;
         }
         public UserEntity UserAuthentication(string login, string password)
@@ -71,7 +71,12 @@ namespace Data
             else throw new Exception("Неверно введены данные или пользователя не существует");
 
             List<string> formatForFile = new List<string>();
-            formatForFile.Add(selectedUser.ToString());
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(selectedUser.Id + "~");
+            stringBuilder.Append(selectedUser.Login + "~");
+            stringBuilder.Append(selectedUser.Password + ",");
+
+            formatForFile.Add(stringBuilder.ToString());
 
             File.WriteAllLines("Loggined User.txt", formatForFile.ToArray());
             return selectedUser;

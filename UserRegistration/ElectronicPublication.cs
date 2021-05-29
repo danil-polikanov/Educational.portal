@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EducationPortal
 {
-    class ElectronicPublication :Material
+    class ElectronicPublication
     {
         public string[] authors { get; set; }
         public uint NumberOfPages { get; set; }
