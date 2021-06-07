@@ -9,7 +9,9 @@ namespace Domain.Entity
     public interface IUserService
     {
         public List<UserEntity> ShowUsers();
-        public List<UserEntity> UserRegistration(string login,string password);
+        public bool UserRegistration(string login,string password);
         public UserEntity UserAuthentication(string login, string password);
+        public bool AddPassingCourse(int userId, string name);
+        public bool PassCourse(int userId,int courseId, int materialId);
     }
 }

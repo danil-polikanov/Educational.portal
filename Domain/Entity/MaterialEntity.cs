@@ -10,5 +10,7 @@ namespace Domain.Entity
     public class MaterialEntity : BaseEntity
     {
         public string Name { get; set; }
+        public int UserId { get; set; }
+        static public int counter = 1;
     }
 }

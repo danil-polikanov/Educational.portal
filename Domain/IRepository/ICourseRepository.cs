@@ -8,5 +8,8 @@ namespace Domain.Entity
 {
     public interface ICourseRepository
     {
+        public void SaveList();
+        public List<CourseEntity> ShowCourses();
+        public bool AddCourse(CourseEntity course);
     }
 }

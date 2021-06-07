@@ -8,5 +8,7 @@ namespace Domain.Entity
 {
     public interface ISkillRepository
     {
+        public List<SkillEntity> ShowSkills();
+        public bool AddSkills(SkillEntity skill);
     }
 }

@@ -4,82 +4,82 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Data
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
-        List<UserEntity> users = new List<UserEntity>();
+        List<UserEntity> allUsers = new List<UserEntity>();
+        List<UserEntity> logginedUsers = new List<UserEntity>();
+        private readonly string defaultPathRegisteredUsers = "Registered Users.txt";
+        private readonly string defaultPathLogginedUsers = "Loggined User.txt";
         public List<UserEntity> ShowUsers()
         {
-            return null;
+            var userList = File.ReadAllText("Registered Users.txt").Split(',').ToList().Where(x => !String.IsNullOrWhiteSpace(x));
+
+            var result = new List<UserEntity>();
+            if (!File.Exists(defaultPathRegisteredUsers))
+            {
+                File.Create(defaultPathRegisteredUsers).Close();
+            }
+            string jsonString;
+            jsonString = File.ReadAllText(defaultPathRegisteredUsers);
+            if (jsonString != "")
+            {
+                result.AddRange(JsonSerializer.Deserialize<List<UserEntity>>(jsonString));
+            }
+            return result;
         }
-        public List<UserEntity> UserRegistration(string login, string password)
+        public bool UserRegistration(UserEntity user)
         {
-
-            if (login == "Admin")
-                throw new Exception("Login cant be Admin");
-            if (users.Any(u => u.Login != null))
-            {
-                if (users.Any(u => u.Login == login))
-                    throw new Exception("User with same name exists already.");
-            }
-            users.Add(new UserEntity(login, password));
-
-            foreach (var a in users)
-            {
-                string temp = String.Join("~", a);
-                if (temp == password)
-                {
-                    temp.Concat(",");
-                }
-                users.Append(a);
-            }
-            StringBuilder stringBuilder = new StringBuilder();
-            foreach (var i in users)
-            {
-                stringBuilder.Append(i.Id + "~");
-                stringBuilder.Append(i.Login + "~");
-                stringBuilder.Append(i.Password + ",");
-            }
-
-            string filename = "Registered Users.txt";
-            using (var file = new StreamWriter(filename))
-            {
-                file.Write(stringBuilder.ToString());
-            }
-            return users;
+            var userList = ShowUsers();
+            userList.Add(user);
+            string jsonString;
+            jsonString = JsonSerializer.Serialize(userList.OfType<UserEntity>());
+            File.WriteAllText(defaultPathRegisteredUsers, jsonString);
+            return true;
         }
         public UserEntity UserAuthentication(string login, string password)
         {
-            var users = File.ReadAllText("Registered Users.txt").Split(',').ToList().Where(x => !String.IsNullOrWhiteSpace(x));
+            var userList = ShowUsers();
 
-            List<UserEntity> myUsers = new List<UserEntity>();
-            foreach (var user in users)
-            {
-                var information = user.Split('~');
-                UserEntity temp = new UserEntity();
-                temp.Id = int.Parse(information[0]);
-                temp.Login = information[1].Trim();
-                temp.Password = information[2].Trim();
-                myUsers.Add(temp);
-            }
-            var selectedUser = myUsers.Where(x => x.Login == login && x.Password == password).SingleOrDefault();
-            if (selectedUser != null)
-                Console.WriteLine("Вы залогинились");
-            else throw new Exception("Неверно введены данные или пользователя не существует");
-
-            List<string> formatForFile = new List<string>();
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append(selectedUser.Id + "~");
-            stringBuilder.Append(selectedUser.Login + "~");
-            stringBuilder.Append(selectedUser.Password + ",");
-
-            formatForFile.Add(stringBuilder.ToString());
-
-            File.WriteAllLines("Loggined User.txt", formatForFile.ToArray());
+            var selectedUser = userList.Where(x => x.Login == login && x.Password == password).SingleOrDefault();
+            if (selectedUser == null)
+                return null;
+            string jsonString;
+            jsonString = JsonSerializer.Serialize(selectedUser);
+            File.WriteAllText(defaultPathLogginedUsers, jsonString);
             return selectedUser;
         }
+        public bool AddPassingCourse(UserEntity selectedUser)
+        {
+            var userList = ShowUsers();
+            var NewUserList = userList.Where(x => x.Id != selectedUser.Id).Select(x => x).Append(selectedUser);
+            string jsonString;
+            jsonString = JsonSerializer.Serialize(NewUserList.OfType<UserEntity>());
+            File.WriteAllText(defaultPathRegisteredUsers, jsonString);
+            jsonString = JsonSerializer.Serialize(selectedUser);
+            File.WriteAllText(defaultPathLogginedUsers, jsonString);
+            return true;
+        }
+        public bool PassCourse(UserEntity selectedUser)
+        {
+            var userList = ShowUsers();
+            var NewUserList = userList.Where(x => x.Id != selectedUser.Id).Select(x => x).Append(selectedUser);
+            string jsonString;
+            jsonString = JsonSerializer.Serialize(NewUserList.OfType<UserEntity>());
+            File.WriteAllText(defaultPathRegisteredUsers, jsonString);
+            jsonString = JsonSerializer.Serialize(selectedUser);
+            File.WriteAllText(defaultPathLogginedUsers, jsonString);
+            return true;
+        }
+        //public bool AddSkills(SkillEntity skill)
+        //{
+        //    skills.Add(skill);
+        //    SaveList();
+        //    return true;
+        //}
     }
 }

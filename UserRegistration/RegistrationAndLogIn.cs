@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace EducationPortal
 {
-    class VideoResource
+    public class RegistrationAndLogIn
     {
-        public TimeSpan Duration { get; set; }
-        public string Quality { get; set; }
+
     }
 }
