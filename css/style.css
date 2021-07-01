@@ -1,0 +1,155 @@
+*{
+	margin: 0;
+	padding: 0;
+	font-family: calibri;
+}
+.header{
+	background-image: url(../img/bg-header.png);
+	background-size: 100%;
+	background-repeat: no-repeat;
+	padding: 0px 0px 0px 50px;
+}
+
+.menu{
+	background-color: #006599;
+	display:flex;
+	justify-content: flex-start;
+	padding: 3px;
+	margin: 10px;
+	margin-left: 15%;
+	margin-right: 7%;
+	color:white;
+	font-size: 14pt;
+	border-radius: 4px;
+	max-width: 100%;
+}
+.button{
+	padding: 10px;
+}
+.button:hover{
+	color:grey;
+	cursor:pointer;
+}
+
+main{
+	background: scroll darkgray;
+	padding: 10px;
+	height: auto;
+	background-image: url(../img/thumb2-crumpled-paper-texture-white-crumpled-paper-background-paper-texture-white-paper-crumpled-paper.jpg);
+}
+.all-content{
+	background-color: white;
+	padding: 30px;
+	position: relative;
+	display: inline-block;
+	width: 70%;
+	height: auto;
+	margin: 10px;
+	margin-left: 15%;
+	margin-right: 15%;
+	border-radius: 4px;	
+
+}
+.main-content-left{
+	float:left;
+	max-width: 100%;
+}
+.post{
+	display: block;
+	padding: 30px 0;
+	min-height: 200px;
+	width: 65%;
+	text-align: left;
+}
+
+.post-title{
+	color:#006599;
+}
+.post-sub-info{
+	color:grey;
+	font-size: 8pt;
+}
+.post-img{
+	border: 5px solid grey;
+	float: left;
+	margin: 10px 20px 10px 0;
+	max-width: 30%;
+}
+.post-read-button{
+	background-color: gainsboro;
+	color: grey;
+	float: right;
+	font-size: 10pt;
+	font-weight: bold;
+	padding: 5px;
+}
+
+.post-read-button:hover{
+	box-shadow: 0 0 5px black;
+	cursor:pointer;
+}
+
+
+.main-content-right{
+	position: absolute;
+	top:10px;
+	right: 10px;
+	height: auto;
+	padding-left: 10px;
+	width: 30%;
+}
+.hot-topics{
+	padding-bottom: 20px;
+}
+.topic-name{
+	background: url(../img/boxtitle.png) 0 -25.5px  no-repeat,
+				 #006599 0 0;
+font-family: Corbel;
+	color:white;
+	padding:5px 5px 5px 50px;
+	font-size: 18pt;
+	margin-bottom: 20px;
+	text-align: 
+}
+
+.topic-content{
+	padding: 8px 8px 15px 8px;
+	line-height: 1.5em;
+}
+.topic-decorated-list{
+	list-style-image: url(../img/marker-1.gif);
+}
+.topic-decorated-list>li:hover{
+	color: #006599;
+	cursor: pointer;
+}
+.topic-img{
+	height: 50px;
+	margin:10px;
+	padding: 0;
+	border:5px solid grey;
+}
+.topic-sub-name>h4{
+	color:#006599;
+	margin: 0;
+}
+.popular-posts-topic:hover{
+	box-shadow: 0 0 5px black;
+	cursor:pointer;
+}
+
+footer{
+	color:white;
+background-color: #3f3f3f;
+	width: 100%;
+height: auto;
+box-sizing: border-box;
+  display: inline-block;
+  text-align: left;
+}
+.footer-info>div{
+	width: 33%;
+		display: inline-block;
+		float: left;
+		margin-right: 2%;
+}
