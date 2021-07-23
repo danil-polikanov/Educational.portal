@@ -1,0 +1,23 @@
+﻿@{
+	ViewData["Title"] = "LearningCourse";
+}
+<h1>Список материалов курса</h1>
+
+<form asp-action="LearningCourse">
+	<div class="form-group">
+		<label class="control-label">Name</label>
+		<select class="form-control" Name="materialId">
+			@if (ViewBag.PassingCourse != null)
+			{
+				@foreach (var i in ViewBag.PassingCourse)
+				{
+					<option value="@i.Id">@i.Name</option>
+				}
+			}
+		</select>
+	</div>
+	<div class="form-group">
+		<input type="submit" value="Save" class="btn btn-primary" />
+	</div>
+</form>
+
