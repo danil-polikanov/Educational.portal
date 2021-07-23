@@ -1,0 +1,53 @@
+﻿@model MainProject.Core.ElectronicPublicationEntity
+
+@{
+	ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Materials</h4>
+<hr />
+<div class="row">
+	<div class="col-md-4">
+		<form asp-action="Create">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group">
+				<div class="form-group">
+					<label asp-for="Name" class="control-label"></label>
+					<input asp-for="Name" class="form-control" />
+					<span asp-validation-for="Name" class="text-danger"></span>
+				</div>
+				<label asp-for="Authors" class="control-label"></label>
+				<input asp-for="Authors" class="form-control" />
+				<span asp-validation-for="Authors" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="NumberOfPages" class="control-label"></label>
+				<input asp-for="NumberOfPages" class="form-control" />
+				<span asp-validation-for="NumberOfPages" class="text-danger"></span>
+				<div class="form-group">
+					<label asp-for="Format" class="control-label"></label>
+					<input asp-for="Format" class="form-control" />
+					<span asp-validation-for="Format" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label asp-for="YearOfPublishing" class="control-label"></label>
+					<input asp-for="YearOfPublishing" class="form-control" />
+					<span asp-validation-for="YearOfPublishing" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="form-group">
+				<input type="submit" value="Create" class="btn btn-primary" />
+			</div>
+		</form>
+	</div>
+</div>
+
+<div>
+	<a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

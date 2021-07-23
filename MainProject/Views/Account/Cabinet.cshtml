@@ -1,0 +1,133 @@
+﻿@model IEnumerable<MainProject.Core.PassingCourse>
+@{
+	ViewData["Title"] = "Home Page";
+}
+<table class="table">
+	<thead>
+		<tr>
+			@foreach (var i in ViewBag.Titles)
+			{
+				<th>
+					@Html.DisplayName(i)
+				</th>
+			}
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			@foreach (var i in ViewBag.UserInfo)
+			{
+				<td>
+					@i
+				</td>
+			}
+		</tr>
+	</tbody>
+</table>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayName("Passing courses")
+			</th>
+		</tr>
+		<tr>
+			<th>
+				@Html.DisplayName("Course Name")
+			</th>
+			<th>
+				@Html.DisplayName("Progress")
+			</th>
+			<th>
+				@Html.DisplayName("IsComplete")
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		@if (Model != null)
+		{
+			@foreach (var item in Model)
+			{
+				<tr>
+
+					<td>
+						@Html.DisplayFor(modelItem => item.Course.Name)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Progress)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.IsComplete)
+					</td>
+					<td>
+						<a asp-controller="Course" asp-action="LearningCourse" asp-route-id="@item.CourseId">Pass Course</a>
+					</td>
+				</tr>
+			}
+		}
+	</tbody>
+</table>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayName("Finished Materials")
+			</th>
+		</tr>
+		<tr>
+			<th>
+				@Html.DisplayName("Material Name")
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		@if (ViewBag.FinishedMaterials != null)
+		{
+			@foreach (var item in ViewBag.FinishedMaterials)
+			{
+				<tr>
+					<td>
+						@Html.DisplayName(item.Name)
+					</td>
+				</tr>
+			}
+		}
+	</tbody>
+</table>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayName("Skills")
+			</th>
+			<th>
+		</tr>
+		<tr>
+			<th>
+				@Html.DisplayName("Skill Name")
+			</th>
+			<th>
+		</tr>
+	</thead>
+	<tbody>
+		@if (ViewBag.Skills != null)
+		{
+			@foreach (var items in ViewBag.Skills)
+			{
+				<tr>
+					<td>
+						@Html.DisplayName(items.Name)
+					</td>
+					<td>
+							@foreach (var item in items.SkillUserEnrollments)
+							{
+								@item.Level
+							}
+						</td>
+				</tr>
+			}
+		}
+	</tbody>
+</table>
+
+

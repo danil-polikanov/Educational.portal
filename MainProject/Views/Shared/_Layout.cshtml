@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - MainProject</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+	<header>
+		<div class="header">
+		</div>
+	</header>
+	<main>
+		<menu class="menu">
+			<div class="button">
+				<a style="color: #ffffff
+" href="/Home/Index">Главная страница</a>
+			</div>
+			@if (this.Context.User.Identity.IsAuthenticated == true)
+			{
+				<div class="button"><a style="color: #ffffff" href="/Course/Index">Курсы</a></div>
+				<div class="button"><a style="color: #ffffff" href="/Material/Index"> Материалы</a></div>
+				<div class="button"><a style="color: #ffffff" href="/Skill/Index">Способности</a></div>
+			}
+			@if (this.Context.User.Identity.IsAuthenticated != true)
+			{
+				<div class="button-user"><a style="color: #ffffff" href="/Account/Register">Регистрация</a></div>
+				<div class="button-user"><a style="color: #ffffff" href="/Account/Login">Вход</a></div>
+			}
+			@if (this.Context.User.Identity.IsAuthenticated == true)
+			{
+				<div class="button-user"><a style="color: #ffffff" href="/Account/Cabinet">Личный кабинет</a></div>
+				<div class="button-user"><a style="color: #ffffff" href="/Account/Logout">Выход</a></div>
+			}
+		</menu>
+		<div class="all-content">
+			@RenderBody()
+		</div>
+	</main>
+	<footer>
+		<div class="footer-info">
+			<div class="footer-about">
+				<h2>About us</h2>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. <span style="color:#006599;">Repellendus</span> aliquid, consequatur quo maiores alias eum nobis incidunt ipsum possimus quidem saepe dolore exercitationem ducimus error voluptatum hic iste tenetur qui?</p>
+			</div>
+			<div class="footer-categories">
+				<h2>Categories</h2>
+				<p>
+					<ul class="topic-decorated-list">
+						<li>Free HTML5 Templates</li>
+						<li>Free Css3 Templates</li>
+						<li>Free Responsive HTML5 Templates</li>
+						<li>Free Basic HTML5 Templates</li>
+						<li>Free Layout HTML5 Templates</li>
+					</ul>
+				</p>
+			</div>
+		</div>
+		<div class="footer-posts">
+			<h2>Featured posts</h2>
+			<img src="~/img/thumb4.jpg" alt="">
+			<img src="~/img/thumb5.jpg" alt="">
+			<img src="~/img/thumb6.jpg" alt="">
+			<img src="~/img/thumb5.jpg" alt="">
+			<img src="~/img/thumb6.jpg" alt="">
+			<img src="~/img/thumb4.jpg" alt="">
+		</div>
+	</footer>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
